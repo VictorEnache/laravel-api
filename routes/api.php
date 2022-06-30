@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/articoli', [PostApiController::class, 'index' ]);
+
+Route::get('posts', function () {
+    $posts = Post::all();
+
+    return response()->json([
+        'status_code' => 200,
+        'posts' => $posts
+    ]);
+});
